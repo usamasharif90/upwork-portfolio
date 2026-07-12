@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usama Sharif — Campaign Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #F0D98A;
+    --gold-pale: #FDF6E3;
+    --navy: #0D1B2A;
+    --navy2: #162336;
+    --navy3: #1E2F44;
+    --cream: #FAF7F2;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --border: rgba(201,168,76,0.2);
+    --card-bg: #ffffff;
+    --success: #10B981;
+    --success-bg: #ECFDF5;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px 80px;
+  }
+
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(201,168,76,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(201,168,76,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(800px) rotateX(20deg) scale(1.4);
+    transform-origin: top center;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+    pointer-events: none;
+  }
+  .orb1 { width: 500px; height: 500px; background: var(--gold); top: -120px; right: -100px; }
+  .orb2 { width: 300px; height: 300px; background: #3B82F6; bottom: -80px; left: -60px; }
+
+  .hero-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; width: 100%; }
+
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light);
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 100px;
+    margin-bottom: 28px;
+  }
+  .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 7vw, 78px);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--gold); }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+
+  .hero-contacts {
+    display: flex; flex-wrap: wrap; gap: 12px;
+    margin-bottom: 48px;
+  }
+  .hero-contact {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.7); font-size: 14px;
+    text-decoration: none;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 16px; border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .hero-contact:hover { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.4); color: var(--gold-light); }
+  .hero-contact svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    max-width: 680px;
+  }
+  .hero-stat {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .hero-stat:first-child { border-radius: 12px 0 0 12px; }
+  .hero-stat:last-child { border-radius: 0 12px 12px 0; }
+  .hero-stat:hover { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); }
+  .stat-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--gold); display: block; line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-lbl { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; }
+
+  .scroll-cue {
+    position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.25); font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+    z-index: 2;
+    animation: float 3s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(-8px)} }
+  .scroll-cue span { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(201,168,76,0.5), transparent); }
+
+  /* ── SECTION LAYOUT ────────────────────────────── */
+  .section { padding: 100px 40px; max-width: 1000px; margin: 0 auto; }
+
+  .section-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 40px); font-weight: 800;
+    color: var(--navy); line-height: 1.1; margin-bottom: 16px;
+  }
+  .section-sub { font-size: 17px; color: var(--muted); max-width: 520px; line-height: 1.7; }
+
+  /* ── ABOUT / SKILLS ────────────────────────────── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 48px; }
+
+  .about-text { font-size: 16px; color: #374151; line-height: 1.8; }
+  .about-text p + p { margin-top: 16px; }
+
+  .skills-wrap { display: flex; flex-direction: column; gap: 12px; }
+  .skill-row {
+    display: flex; align-items: center; gap: 12px;
+    background: white; border: 1px solid #E5E7EB;
+    padding: 12px 16px; border-radius: 10px;
+    transition: all 0.2s;
+  }
+  .skill-row:hover { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(201,168,76,0.1); }
+  .skill-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--navy); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .skill-icon svg { width: 16px; height: 16px; }
+  .skill-name { font-size: 13px; font-weight: 500; color: var(--navy); flex: 1; }
+  .skill-bar { width: 80px; height: 4px; background: #F3F4F6; border-radius: 2px; overflow: hidden; }
+  .skill-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold-light)); border-radius: 2px; }
+
+  /* ── CAMPAIGNS ─────────────────────────────────── */
+  .campaigns-section { background: var(--navy); padding: 100px 40px; }
+  .campaigns-inner { max-width: 1000px; margin: 0 auto; }
+  .campaigns-section .section-title { color: white; }
+  .campaigns-section .section-sub { color: rgba(255,255,255,0.5); }
+
+  .campaign-card {
+    background: var(--navy2);
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 56px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .campaign-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.3);
+  }
+
+  .card-top-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), #C084FC);
+  }
+
+  .card-header {
+    padding: 36px 40px 28px;
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: start;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .card-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
+  }
+  .card-num::before {
+    content: ''; display: inline-block; width: 20px; height: 1px; background: var(--gold);
+  }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(20px, 3vw, 28px); font-weight: 700;
+    color: white; line-height: 1.2; margin-bottom: 10px;
+  }
+
+  .card-meta {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .meta-tag {
+    font-size: 12px; color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 4px 12px; border-radius: 100px;
+  }
+
+  .card-badge-stack { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .platform-badge {
+    font-size: 11px; font-weight: 600; letter-spacing: 1px;
+    padding: 4px 12px; border-radius: 100px;
+    background: rgba(201,168,76,0.12); color: var(--gold-light);
+    border: 1px solid rgba(201,168,76,0.25);
+  }
+
+  .card-body { padding: 32px 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  .card-section-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-bottom: 14px;
+  }
+
+  .objective-text { font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+
+  .resp-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .resp-list li {
+    font-size: 14px; color: rgba(255,255,255,0.55); line-height: 1.6;
+    padding-left: 18px; position: relative;
+  }
+  .resp-list li::before {
+    content: ''; position: absolute; left: 0; top: 9px;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--gold); opacity: 0.6;
+  }
+
+  /* Metrics */
+  .metrics-row {
+    padding: 0 40px 32px;
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px;
+  }
+  .metric-tile {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 16px 12px;
+    text-align: center; position: relative; overflow: hidden;
+    transition: all 0.25s;
+  }
+  .metric-tile::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .metric-tile:hover {
+    background: rgba(201,168,76,0.08);
+    border-color: rgba(201,168,76,0.3);
+    transform: translateY(-2px);
+  }
+  .metric-val {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800; color: var(--gold);
+    display: block; line-height: 1; margin-bottom: 5px;
+  }
+  .metric-lbl { font-size: 10px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 1px; line-height: 1.3; }
+  .metric-sub { font-size: 9.5px; color: rgba(255,255,255,0.2); margin-top: 4px; }
+
+  /* Highlight & Learning */
+  .card-footer {
+    padding: 0 40px 32px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+
+  .highlight-box {
+    background: rgba(201,168,76,0.07);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 12px; padding: 20px;
+  }
+  .highlight-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .highlight-label::before { content: '★'; font-size: 12px; }
+  .highlight-text { font-size: 13.5px; color: rgba(255,255,255,0.7); line-height: 1.65; }
+
+  .learning-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px; padding: 20px;
+  }
+  .learning-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.3); margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+  }
+  .learning-label::before { content: '◆'; font-size: 10px; }
+  .learning-text { font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  /* Tools row */
+  .tools-row { padding: 0 40px 32px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool-pill {
+    font-size: 11px; font-weight: 500;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.5);
+    padding: 5px 12px; border-radius: 100px;
+  }
+
+  /* ── WHY ME TABLE ───────────────────────────────── */
+  .fit-section { padding: 100px 40px; max-width: 1000px; margin: 0 auto; }
+  .fit-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 48px; overflow: hidden; border-radius: 16px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
+  .fit-table thead th {
+    background: var(--navy); color: white;
+    font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    padding: 18px 24px; text-align: left;
+  }
+  .fit-table thead th:first-child { border-radius: 16px 0 0 0; border-right: 1px solid rgba(255,255,255,0.06); }
+  .fit-table thead th:last-child { border-radius: 0 16px 0 0; }
+  .fit-table tbody tr:nth-child(odd) td { background: white; }
+  .fit-table tbody tr:nth-child(even) td { background: #F9F6F0; }
+  .fit-table tbody tr:last-child td:first-child { border-radius: 0 0 0 16px; }
+  .fit-table tbody tr:last-child td:last-child { border-radius: 0 0 16px 0; }
+  .fit-table tbody td {
+    padding: 16px 24px; font-size: 14px; line-height: 1.6; vertical-align: top;
+    border-bottom: 1px solid #F3F0EA;
+  }
+  .fit-table tbody tr:last-child td { border-bottom: none; }
+  .fit-table .need-col { font-weight: 600; color: var(--navy); border-right: 1px solid #E5E0D5; }
+  .fit-table .bring-col { color: #374151; }
+  .check { display: inline-block; color: var(--success); font-weight: 700; margin-right: 6px; }
+
+  /* ── FOOTER ─────────────────────────────────────── */
+  .footer { background: var(--navy); padding: 60px 40px; text-align: center; }
+  .footer-name {
+    font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800;
+    color: white; margin-bottom: 6px;
+  }
+  .footer-name span { color: var(--gold); }
+  .footer-role { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 28px; }
+  .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .footer-link {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: rgba(255,255,255,0.55);
+    text-decoration: none; padding: 8px 20px;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 100px;
+    transition: all 0.2s;
+  }
+  .footer-link:hover { color: var(--gold-light); border-color: rgba(201,168,76,0.4); }
+  .footer-note { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+  @media (max-width: 700px) {
+    .hero-stats { grid-template-columns: repeat(2,1fr); }
+    .about-grid { grid-template-columns: 1fr; }
+    .card-body { grid-template-columns: 1fr; }
+    .metrics-row { grid-template-columns: repeat(3,1fr); }
+    .card-footer { grid-template-columns: 1fr; }
+    .card-header { grid-template-columns: 1fr; }
+    .card-badge-stack { align-items: flex-start; }
+    .hero { padding: 60px 24px 80px; }
+    .section, .fit-section { padding: 60px 24px; }
+    .campaigns-section { padding: 60px 24px; }
+    .card-header, .card-body, .metrics-row, .card-footer, .tools-row { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="orb1 hero-orb"></div>
+  <div class="orb2 hero-orb"></div>
+  <div class="hero-content">
+    <div class="badge">Campaign Portfolio · Marketing Specialist</div>
+    <h1>Usama<br><span>Sharif</span></h1>
+    <p class="hero-subtitle">Digital Marketing Specialist in E-Commerce &amp; Retail — Fashion &amp; Apparel</p>
+
+    <div class="hero-contacts">
+      <a href="mailto:usamasharif24@gmail.com" class="hero-contact">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        usamasharif24@gmail.com
+      </a>
+      <a href="tel:+971565954968" class="hero-contact">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+        +971 56 595 4968
+      </a>
+      <a href="https://www.linkedin.com/in/usamasharif/" target="_blank" class="hero-contact">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        linkedin.com/in/usamasharif
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-val">3+</span><span class="stat-lbl">Years Exp.</span></div>
+      <div class="hero-stat"><span class="stat-val">4.6x</span><span class="stat-lbl">Avg ROAS</span></div>
+      <div class="hero-stat"><span class="stat-val">AED 255K</span><span class="stat-lbl">Revenue Generated</span></div>
+      <div class="hero-stat"><span class="stat-val">5</span><span class="stat-lbl">Platforms</span></div>
+    </div>
+  </div>
+  <div class="scroll-cue">scroll<span></span></div>
+</section>
+
+<!-- ── ABOUT ── -->
+<section class="section">
+  <p class="section-eyebrow">About Me</p>
+  <h2 class="section-title">Turning campaigns<br>into conversions</h2>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a results-driven digital marketing specialist with 3+ years of experience managing full-funnel paid and organic campaigns for fashion e-commerce brands across GCC markets.</p>
+      <p>I handle everything end-to-end — from strategy and creative development to A/B testing, audience segmentation, and weekly performance reporting — ensuring every dirham of ad spend works harder.</p>
+      <p>My edge is combining data-driven decisions with an eye for culturally relevant creative, particularly within the UAE and KSA fashion retail space.</p>
+    </div>
+    <div class="skills-wrap">
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div>
+        <span class="skill-name">Paid Social (Meta / TikTok)</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
+        <span class="skill-name">Google Ads &amp; Shopping</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+        <span class="skill-name">Email &amp; SMS Marketing</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 012 0v2m6 0V2a1 1 0 012 0v2M3 10h18M5 4h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2z"/></svg></div>
+        <span class="skill-name">Content Strategy &amp; Scheduling</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+        <span class="skill-name">Analytics &amp; Performance Reporting</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:87%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-icon"><svg fill="none" stroke="#C9A84C" viewBox="0 0 24 24" width="16" height="16"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <span class="skill-name">Influencer &amp; Creator Coordination</span>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CAMPAIGNS ── -->
+<section class="campaigns-section">
+  <div class="campaigns-inner">
+    <p class="section-eyebrow">Case Studies</p>
+    <h2 class="section-title">Campaign Portfolio</h2>
+    <p class="section-sub">Two of four campaigns managed in 2023 — full analytics available on request.</p>
+
+    <!-- CAMPAIGN 01 -->
+    <div class="campaign-card">
+      <div class="card-top-bar"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-num">Campaign 01</div>
+          <h3 class="card-title">Ramadan Season Launch Campaign</h3>
+          <div class="card-meta">
+            <span class="meta-tag">NOHA Modest Fashion</span>
+            <span class="meta-tag">Mar – Apr 2023</span>
+            <span class="meta-tag">6 Weeks</span>
+            <span class="meta-tag">Budget: AED 28,000</span>
+          </div>
+        </div>
+        <div class="card-badge-stack">
+          <span class="platform-badge">Instagram</span>
+          <span class="platform-badge">Facebook Ads</span>
+          <span class="platform-badge">TikTok</span>
+          <span class="platform-badge">Email · Google Shopping</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <p class="card-section-label">Objective</p>
+          <p class="objective-text">Drive online sales and brand awareness for the Ramadan Eid collection targeting women aged 18–35 in GCC markets, positioning the brand as the go-to modest fashion destination for the festive season.</p>
+        </div>
+        <div>
+          <p class="card-section-label">My Responsibilities</p>
+          <ul class="resp-list">
+            <li>Developed full-funnel content calendar (60+ posts/stories/reels) aligned with Ramadan countdown themes</li>
+            <li>Created and A/B tested 14 ad creatives across Meta (carousel, video, collection formats)</li>
+            <li>Launched TikTok trend-led Reels (#RamadanLook challenge) with 3 micro-influencers</li>
+            <li>Set up Google Shopping campaigns with custom product feed optimisation for 120 SKUs</li>
+            <li>Wrote and scheduled 8-part email drip sequence (welcome → teaser → launch → Eid countdown)</li>
+            <li>Monitored daily dashboards and reallocated budget to top-performing ad sets weekly</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-tile"><span class="metric-val">312%</span><div class="metric-lbl">ROAS</div><div class="metric-sub">Return on Ad Spend</div></div>
+        <div class="metric-tile"><span class="metric-val">48K+</span><div class="metric-lbl">Link Clicks</div><div class="metric-sub">Across all channels</div></div>
+        <div class="metric-tile"><span class="metric-val">2.1M</span><div class="metric-lbl">Impressions</div><div class="metric-sub">Paid + organic</div></div>
+        <div class="metric-tile"><span class="metric-val">8.7%</span><div class="metric-lbl">Email CTR</div><div class="metric-sub">vs 2.4% avg</div></div>
+        <div class="metric-tile"><span class="metric-val">AED 184K</span><div class="metric-lbl">Revenue</div><div class="metric-sub">6-week window</div></div>
+        <div class="metric-tile"><span class="metric-val">+67%</span><div class="metric-lbl">Followers</div><div class="metric-sub">Instagram growth</div></div>
+      </div>
+
+      <div class="card-footer">
+        <div class="highlight-box">
+          <div class="highlight-label">Campaign Highlight</div>
+          <p class="highlight-text">The TikTok challenge reel generated 310K organic views with zero paid spend, becoming the brand's most-watched video to date.</p>
+        </div>
+        <div class="learning-box">
+          <div class="learning-label">Key Learning</div>
+          <p class="learning-text">Early creative testing revealed video outperformed static 3:1 on CTR — budget was shifted accordingly, improving overall ROAS by an estimated 40% vs. original allocation.</p>
+        </div>
+      </div>
+
+      <div class="tools-row">
+        <span class="tool-pill">Meta Ads Manager</span>
+        <span class="tool-pill">Google Ads</span>
+        <span class="tool-pill">Klaviyo</span>
+        <span class="tool-pill">TikTok Ads</span>
+        <span class="tool-pill">Canva Pro</span>
+        <span class="tool-pill">Google Analytics 4</span>
+      </div>
+    </div>
+
+    <!-- CAMPAIGN 02 -->
+    <div class="campaign-card">
+      <div class="card-top-bar" style="background: linear-gradient(90deg, #3B82F6, #8B5CF6, #C9A84C);"></div>
+      <div class="card-header">
+        <div>
+          <div class="card-num" style="color: #93C5FD;">Campaign 02</div>
+          <h3 class="card-title">Summer Clearance &amp; New Arrivals Push</h3>
+          <div class="card-meta">
+            <span class="meta-tag">NOHA Modest Fashion</span>
+            <span class="meta-tag">Jun – Jul 2023</span>
+            <span class="meta-tag">4 Weeks</span>
+            <span class="meta-tag">Budget: AED 15,500</span>
+          </div>
+        </div>
+        <div class="card-badge-stack">
+          <span class="platform-badge" style="background: rgba(147,197,253,0.1); color: #93C5FD; border-color: rgba(147,197,253,0.25);">Facebook Ads</span>
+          <span class="platform-badge" style="background: rgba(147,197,253,0.1); color: #93C5FD; border-color: rgba(147,197,253,0.25);">Google Display</span>
+          <span class="platform-badge" style="background: rgba(147,197,253,0.1); color: #93C5FD; border-color: rgba(147,197,253,0.25);">SMS · Pinterest</span>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <div>
+          <p class="card-section-label">Objective</p>
+          <p class="objective-text">Clear end-of-season inventory at margin-positive price points while simultaneously launching the summer-to-fall transition collection, using retargeting to maximise conversion from warm audiences.</p>
+        </div>
+        <div>
+          <p class="card-section-label">My Responsibilities</p>
+          <ul class="resp-list">
+            <li>Segmented 12K customer database into VIP, active, and lapsed tiers for personalised messaging</li>
+            <li>Built retargeting funnels for site visitors (7/14/30-day windows) with dynamic product ads</li>
+            <li>Designed Pinterest shopping campaign with seasonal keyword clusters for UAE + KSA</li>
+            <li>Managed Google Search ads with branded/non-branded keywords and negative-keyword refinement</li>
+            <li>Coordinated 3-send SMS blast with exclusive discount codes for loyalty segment</li>
+            <li>Produced weekly performance reports for marketing director with actionable recommendations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">4.6x</span><div class="metric-lbl">ROAS</div><div class="metric-sub">Overall campaign</div></div>
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">91%</span><div class="metric-lbl">Sell-Through</div><div class="metric-sub">Clearance stock</div></div>
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">3.2%</span><div class="metric-lbl">Conv. Rate</div><div class="metric-sub">Site-wide</div></div>
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">22%</span><div class="metric-lbl">SMS CTR</div><div class="metric-sub">vs 6% benchmark</div></div>
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">AED 71K</span><div class="metric-lbl">Revenue</div><div class="metric-sub">4-week window</div></div>
+        <div class="metric-tile" style="border-color: rgba(147,197,253,0.12);"><span class="metric-val" style="color: #93C5FD;">-18%</span><div class="metric-lbl">CPA</div><div class="metric-sub">vs prev. campaign</div></div>
+      </div>
+
+      <div class="card-footer">
+        <div class="highlight-box" style="background: rgba(147,197,253,0.07); border-color: rgba(147,197,253,0.2);">
+          <div class="highlight-label" style="color: #93C5FD;">Campaign Highlight</div>
+          <p class="highlight-text">Dynamic retargeting ads to cart-abandoners achieved a 9.4% conversion rate — 5× the sitewide average — contributing AED 22K of campaign revenue.</p>
+        </div>
+        <div class="learning-box">
+          <div class="learning-label">Key Learning</div>
+          <p class="learning-text">Personalised VIP SMS with first-name merge tags outperformed generic broadcasts by 34% on CTR. Personalisation has been standard in all SMS campaigns since.</p>
+        </div>
+      </div>
+
+      <div class="tools-row">
+        <span class="tool-pill">Meta Ads Manager</span>
+        <span class="tool-pill">Google Ads</span>
+        <span class="tool-pill">Pinterest Ads</span>
+        <span class="tool-pill">Klaviyo SMS</span>
+        <span class="tool-pill">Shopify Analytics</span>
+        <span class="tool-pill">Google Looker Studio</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY ME ── -->
+<section class="fit-section">
+  <p class="section-eyebrow">Why I'm the Right Fit</p>
+  <h2 class="section-title">Your needs.<br>My experience.</h2>
+  <table class="fit-table">
+    <thead>
+      <tr>
+        <th style="width:38%">What You Need</th>
+        <th>What I Bring</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="need-col">E-commerce marketing expertise</td>
+        <td class="bring-col"><span class="check">✓</span>3+ years managing Shopify-based fashion brands with direct revenue impact</td>
+      </tr>
+      <tr>
+        <td class="need-col">Multi-platform campaign management</td>
+        <td class="bring-col"><span class="check">✓</span>Executed full-funnel campaigns across Meta, Google, TikTok, email &amp; SMS simultaneously</td>
+      </tr>
+      <tr>
+        <td class="need-col">Data-driven decision making</td>
+        <td class="bring-col"><span class="check">✓</span>Weekly performance analysis with budget reallocation based on ROAS signals — no guesswork</td>
+      </tr>
+      <tr>
+        <td class="need-col">Creative content strategy</td>
+        <td class="bring-col"><span class="check">✓</span>Developed 100+ campaign creatives; coordinated micro-influencer partnerships for organic reach</td>
+      </tr>
+      <tr>
+        <td class="need-col">GCC market knowledge</td>
+        <td class="bring-col"><span class="check">✓</span>All campaigns targeted UAE/KSA audiences — fluent in regional retail seasons, Ramadan, &amp; cultural nuances</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <p class="footer-name">Usama <span>Sharif</span></p>
+  <p class="footer-role">Digital Marketing Specialist · E-Commerce &amp; Retail</p>
+  <div class="footer-links">
+    <a href="mailto:usamasharif24@gmail.com" class="footer-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      usamasharif24@gmail.com
+    </a>
+    <a href="tel:+971565954968" class="footer-link">
+      <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      +971 56 595 4968
+    </a>
+    <a href="https://www.linkedin.com/in/usamasharif/" target="_blank" class="footer-link">
+      <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn Profile
+    </a>
+  </div>
+  <p class="footer-note">Portfolio prepared for Marketing Specialist — E-Commerce &amp; Retail application · All metrics are representative examples</p>
+</footer>
+
+</body>
+</html>
